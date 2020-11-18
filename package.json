@@ -1,0 +1,11 @@
+{
+  "name": "IS2-homwk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/vannobi/IS2-homwk.git",
+  "author": "vanobi <vonoran00@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "selenium-webdriver": "^4.0.0-alpha.7"
+  }
+}
