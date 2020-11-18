@@ -172,4 +172,4 @@ test('Matrix Multiplication', async () => {
   expect(r.mr).toEqual(mmult(r.ma, r.mb, ax, bx));
 });
 ```
-<dib style="text-align:center"><img src="img/test.png"/></div>
+<div style="text-align:center"><img src="img/test.png"/></div>
