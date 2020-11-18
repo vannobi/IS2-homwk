@@ -161,12 +161,15 @@ const mxprod = (a, b, ax, bx) => {
 };
 ```
 
-Comparacion
+Comparacion usando xunit, haciendo uso de la libreria jest.
 ```js
-if (JSON.stringify(result) === JSON.stringify(r.mr)) {
-    console.log('same');
-} else {
-    console.log('different');
-}
-```
+const { result, mmult } = require('../setup');
+const { ax, bx } = require('../matrices');
 
+test('Matrix Multiplication', async () => {
+  // assertion
+  const r = await result;
+  expect(r.mr).toEqual(mmult(r.ma, r.mb, ax, bx));
+});
+```
+<dib style="text:center"><img src="img/test.png"/></div>

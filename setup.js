@@ -37,10 +37,10 @@ const fillMatrices = async (mx, driver, isResult = false) => {
   return Promise.all(m).then(values => values.map(value => Number(value)));
 };
 
-(async () => {
+const setUpMatrices = async () => {
+  let r = {};
   let driver = new Builder().forBrowser('chrome').build();
   await driver.get('http://matrixmultiplication.xyz/');
-  let r = {};
   r.page_title = await driver.getTitle();
   // r.html = await driver.getPageSource();
   // r.title = await driver.findElement({ className: 'title fq5xi0j' }).getText();
@@ -63,13 +63,21 @@ const fillMatrices = async (mx, driver, isResult = false) => {
     until.elementLocated({ className: 'reset flk4j4b' })
   );
   r.mr = await fillMatrices(rx.mx, driver, (isResult = true));
-  console.log(r);
-  let result = mxprod(r.ma, r.mb, ax, bx);
+  // console.log(r);
+  // let result = mxprod(r.ma, r.mb, ax, bx);
   // search.sendKeys();
-  if (JSON.stringify(result) === JSON.stringify(r.mr)) {
-    console.log('same');
-  } else {
-    console.log('different');
-  }
+  // if (JSON.stringify(result) === JSON.stringify(r.mr)) {
+  //   console.log('same');
+  // } else {
+  //   console.log('different');
+  // }
   driver.quit();
-})();
+  return r;
+};
+
+// const result = await setUpMatrices();
+
+module.exports = {
+  result: (async () => await setUpMatrices())(),
+  mmult: mxprod,
+};
