@@ -164,28 +164,35 @@ const mxprod = (a, b, ax, bx) => {
 };
 ```
 
-Comparacion usando xunit, haciendo uso de la libreria jest.
+Comparacion, de los resultados con valores esperados
 ```js
-const test_identity_a = [
-  ['1', '0', '0'],
-  ['0', '1', '0'],
-  ['0', '0', '1'],
-];
-const test_identity_b = [
-  ['1', '2'],
-  ['3', '4'],
-  ['5', '6'],
-];
+const main = async () => {
+  // test case: default matrix multiplication
+  // using default matrices
+  let r = await setUpMatrices();
+  if (JSON.stringify(r.mr) == JSON.stringify(mxprod(r.ma, r.mb, ax, bx))) {
+    console.log('1st test case: passed');
+  } else {
+    console.log('1st test case: failed');
+  }
 
-test('Matrix Multiplication Default', async () => {
-  const r = await setUpMatrices();
-  expect(r.mr).toEqual(mxprod(r.ma, r.mb, ax, bx));
-});
-
-test('Identity Matrix', async () => {
-  const r = await setUpMatrices(test_identity_a, test_identity_b);
-  // r.mb  = test_identity_b
-  expect(r.mb).toEqual(mxprod(r.ma, r.mb, ax, bx));
-});
+  // test case: multiplication with identity matrix
+  const test_identity_a = [
+    ['1', '0', '0'],
+    ['0', '1', '0'],
+    ['0', '0', '1'],
+  ];
+  const test_identity_b = [
+    ['1', '2'],
+    ['3', '4'],
+    ['5', '6'],
+  ];
+  r = await setUpMatrices(test_identity_a, test_identity_b);
+  if (JSON.stringify(r.mb) == JSON.stringify(mxprod(r.ma, r.mb, ax, bx))) {
+    console.log('2nd test case: passed');
+  } else {
+    console.log('2nd test case: failed');
+  }
+};
 ```
-<div style="text-align:center"><img src="img/test.png"/></div>
+<div style="text-align:center"><img src="img/process.png"/></div>
