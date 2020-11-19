@@ -8,20 +8,23 @@
 
 La entrada es la matriz default de la pagina web <link>http://matrixmultiplication.xyz/</link>
 
-### Matriz A
 
-| 1 | 2 | 1 |
-|---|---|---|
-| 0 | 1 | 0 |
-| 2 | 3 | 4 |
+## Casos de prueba
+
+| Step     | Action                                                       | Expected Result                                        |
+|----------|--------------------------------------------------------------|--------------------------------------------------------|
+| Prereq 1 | Tener una conexion con el web browser                        |                                                        |
+| Prereq 2 | Tener una conexion con el web browser                        |                                                        |
+| 1        | Realizar multiplicacion con los valores por defecto          |                                                        |
+| 1.1      | Llenar la matriz A con los valores por defecto               | Lee correctamente los valores de la matriz A           |
+| 1.2      | Llenar la matriz B con los valores por defecto               | Lee correctamente los valores de la matriz B           |
+| 1.3      | Click en Multiplicar, luego en Next                          | El resultado de la multiplicacion debe ser el correcto |
+| 2        | Realizar multiplicacion con Matriz Identidad                 |                                                        |
+| 2.1      | Cambiar la matriz A con los valores de la matriz Identidad   | Se cambia correctamente los valores                    |
+| 2.2      | Cambiar la matriz A con los valores de la matriz B de prueba | Se cambia correctamente los valores                    |
+| 2.3      | Click en Multiplicar, luego en Next                          | El resultado de la multiplicacion debe ser la matriz B |
 
 
-### Matriz B
-
-| 2 | 5 |
-|---|---|
-| 6 | 7 |
-| 1 | 8 |
 
 
 ## Proceso
@@ -163,13 +166,26 @@ const mxprod = (a, b, ax, bx) => {
 
 Comparacion usando xunit, haciendo uso de la libreria jest.
 ```js
-const { result, mmult } = require('../setup');
-const { ax, bx } = require('../matrices');
+const test_identity_a = [
+  ['1', '0', '0'],
+  ['0', '1', '0'],
+  ['0', '0', '1'],
+];
+const test_identity_b = [
+  ['1', '2'],
+  ['3', '4'],
+  ['5', '6'],
+];
 
-test('Matrix Multiplication', async () => {
-  // assertion
-  const r = await result;
-  expect(r.mr).toEqual(mmult(r.ma, r.mb, ax, bx));
+test('Matrix Multiplication Default', async () => {
+  const r = await setUpMatrices();
+  expect(r.mr).toEqual(mxprod(r.ma, r.mb, ax, bx));
+});
+
+test('Identity Matrix', async () => {
+  const r = await setUpMatrices(test_identity_a, test_identity_b);
+  // r.mb  = test_identity_b
+  expect(r.mb).toEqual(mxprod(r.ma, r.mb, ax, bx));
 });
 ```
 <div style="text-align:center"><img src="img/test.png"/></div>
