@@ -108,4 +108,4 @@ En Factory la creacion del objeto envuelve un paso mientras que builder requiere
 
 
 ## Conclusion
-En casos donde tengamos objetos que tienen varios docenas de parametros, la construccion podria ser facilitada mediante un Builder
+En casos donde tengamos objetos que tienen docenas de parametros, la construccion podria ser facilitada mediante un Builder
